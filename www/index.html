@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="format-detection" content="telephone=yess">
+        <meta name="msapplication-tap-highlight" content="no">
+        <link rel="stylesheet" href="css/index.css">
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Movie Repository</title>
+    </head>
+    <body>
+        <!--  -->
+        <header>
+            <nav class="nav-extended">
+                <div class="nav-wrapper">
+                    <img src="img/logo2.png" alt="Logo" class="logo brand-logo center">
+                    <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a href="sass.html">Sass</a></li>
+                        <li><a href="badges.html">Components</a></li>
+                        <li><a href="collapsible.html">JavaScript</a></li>
+                    </ul>
+                </div>
+                <div class="nav-content">
+                  <ul class="tabs tabs-transparent">
+                    <li class="tab"><a href="#test1">Test 1</a></li>
+                    <li class="tab"><a href="#test2">Test 2</a></li>
+                    <li class="tab"><a href="#test3">Disabled Tab</a></li>
+                    <li class="tab"><a href="#test4">Test 4</a></li>
+                  </ul>
+                </div>
+              </nav>
+            
+              <ul class="sidenav" id="mobile-demo">
+                <li><a href="sass.html">Sass</a></li>
+                <li><a href="badges.html">Components</a></li>
+                <li><a href="collapsible.html">JavaScript</a></li>
+              </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="container">
+                <div class="row">
+                    <h2 class="center-align">Les chiffres globaux selon le Ministère des Solidarités et de la Santé :</h2>
+                    <div class="col s12">
+                        <div id="resultAPI"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="page-footer">
+            <div class="container-fluid center-align">
+                <div class="row">
+                    <div class="col s12">
+                       <a href="">A propos</a>
+                       <a href="">Vie privée</a>
+                       <a href="">Condition d'utilisation</a>
+                    </div>
+                 </div>
+                <div class="row">
+                    <div class="col s12">
+                        <i class="far fa-copyright"></i> 2021 MovieRepository, tout droit réservé.
+                    </div>
+                </div>
+            </div>
+        </footer>
+       
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+
+        <script>
+            $(document).ready(function(){
+                $('.sidenav').sidenav();
+            });
+        </script>
+        <!-- exemple de requete api -->
+        <script>
+
+            let endPoint = 'https://coronavirusapi-france.now.sh/FranceLiveGlobalData';
+  
+            function ajaxGet(url, callback){
+                var req = new XMLHttpRequest();
+                req.open('GET', url);
+                req.addEventListener('load', function() {
+                    if(req.status == 200 || req.status < 400){
+                        callback(req.responseText);
+                    } else {
+                        console.error(req.status + '' + req.statusText + '' + url);
+                    }
+                });
+                req.addEventListener('error', function() {
+                    console.error('Erreur avec url : ' + url);
+                });
+                req.send(null);
+                }
+  
+                var contenuPage = document.getElementById('resultAPI');
+  
+                ajaxGet(endPoint, function(reponse) {
+                    let information = JSON.parse(reponse);
+                    let contenu;
+                  
+                    contenu = "<h5 class='text-center mb-3'>Date de dernière actualisation des chiffres : " + information.FranceGlobalLiveData[0].date + "</h5>";
+                    contenu += '<table class="table table-bordered table-dark">';
+                    contenu += "<thead>";
+                    contenu += "<tr>";
+                    contenu += '<th scope="col"></th>';
+                    contenu += '<th scope="col">France</th>';
+                    contenu += '</tr>';
+                    contenu += "</thead>";
+                    contenu += "<tbody>";
+                    contenu += "<tr>";
+                    contenu += '<th scope="row">Cas confirmes</th>'
+                    contenu += "<td>" + information.FranceGlobalLiveData[0].casConfirmes + "</td>";
+                    contenu += "</tr>";
+                    contenu += "<tr>";
+                    contenu += '<th scope="row">Décés en EHPAD</th>';
+                    contenu += "<td>" + information.FranceGlobalLiveData[0].decesEhpad + "</td>"
+                    contenu += "</tr>"
+                    contenu += '<tr>'
+                    contenu += '<th scope="row">Nombre de personnes Hospitalisés</th>'
+                    contenu += "<td>" + information.FranceGlobalLiveData[0].hospitalises + "</td>"
+                    contenu += "</tr>"
+                    contenu += "<tr>";
+                    contenu += '<th scope="row">Nombre de personne en réanimation</th>';
+                    contenu += '<td>' + information.FranceGlobalLiveData[0].reanimation + '</td>';
+                    contenu += '</tr>'
+                    contenu += '<tr>'
+                    contenu += '<th scope="row">Nouvelles hospitalisation</th>'
+                    contenu += '<td>' + information.FranceGlobalLiveData[0].nouvellesHospitalisations + '</td>'
+                    contenu += "</tr>";
+                    contenu += "<tr>"
+                    contenu += '<th scope="row">Nouvelles personnes en réanimation</th>'
+                    contenu += '<td>' + information.FranceGlobalLiveData[0].nouvellesReanimations + '</td>'
+                    contenu += "</tr>";
+                    contenu += "</tbody>";
+                    contenu += "</table>";
+                    contenu += '<div class="row">';
+                    contenu += '<div class="col-6"><h3 class="mb-4 ml-5 text-success">Total des personnes guérie : ' + information.FranceGlobalLiveData[0].gueris + '</h3></div>';
+                    contenu += '<div class="col-6"><h3 class="text-danger">Total des personnes décédé : ' + information.FranceGlobalLiveData[0].deces + '</h3></div>';
+                    contenu += '</div>';
+  
+                    contenuPage.innerHTML = contenu;
+                });
+        </script>
+
+    </body>
+</html>
