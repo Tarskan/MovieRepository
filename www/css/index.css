@@ -19,3 +19,11 @@ main {
     width: 4.2em;
     height: 4.2em;
 }
+
+#resultMovie {
+    margin-top: 3em;
+}
+
+.tagline{
+    font-weight: bold;
+}

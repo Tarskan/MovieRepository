@@ -28,10 +28,6 @@
                 </div>
                 <div class="nav-content">
                   <ul class="tabs tabs-transparent">
-                    <li class="tab"><a href="#test1">Test 1</a></li>
-                    <li class="tab"><a href="#test2">Test 2</a></li>
-                    <li class="tab"><a href="#test3">Disabled Tab</a></li>
-                    <li class="tab"><a href="#test4">Test 4</a></li>
                   </ul>
                 </div>
               </nav>
@@ -48,9 +44,9 @@
         <main>
             <div class="container">
                 <div class="row">
-                    <h2 class="center-align">Les chiffres globaux selon le Ministère des Solidarités et de la Santé :</h2>
                     <div class="col s12">
-                        <div id="resultAPI"></div>
+                        <h2 class="center-align">Bienvenue sur Movie Repository !</h2>
+                        <h4 class="center-align">Vous trouverez ici tout sur les sorites de film et série !</h4>
                     </div>
                 </div>
             </div>
@@ -82,76 +78,6 @@
                 $('.sidenav').sidenav();
             });
         </script>
-        <!-- exemple de requete api -->
-        <script>
-
-            let endPoint = 'https://coronavirusapi-france.now.sh/FranceLiveGlobalData';
-  
-            function ajaxGet(url, callback){
-                var req = new XMLHttpRequest();
-                req.open('GET', url);
-                req.addEventListener('load', function() {
-                    if(req.status == 200 || req.status < 400){
-                        callback(req.responseText);
-                    } else {
-                        console.error(req.status + '' + req.statusText + '' + url);
-                    }
-                });
-                req.addEventListener('error', function() {
-                    console.error('Erreur avec url : ' + url);
-                });
-                req.send(null);
-                }
-  
-                var contenuPage = document.getElementById('resultAPI');
-  
-                ajaxGet(endPoint, function(reponse) {
-                    let information = JSON.parse(reponse);
-                    let contenu;
-                  
-                    contenu = "<h5 class='text-center mb-3'>Date de dernière actualisation des chiffres : " + information.FranceGlobalLiveData[0].date + "</h5>";
-                    contenu += '<table class="table table-bordered table-dark">';
-                    contenu += "<thead>";
-                    contenu += "<tr>";
-                    contenu += '<th scope="col"></th>';
-                    contenu += '<th scope="col">France</th>';
-                    contenu += '</tr>';
-                    contenu += "</thead>";
-                    contenu += "<tbody>";
-                    contenu += "<tr>";
-                    contenu += '<th scope="row">Cas confirmes</th>'
-                    contenu += "<td>" + information.FranceGlobalLiveData[0].casConfirmes + "</td>";
-                    contenu += "</tr>";
-                    contenu += "<tr>";
-                    contenu += '<th scope="row">Décés en EHPAD</th>';
-                    contenu += "<td>" + information.FranceGlobalLiveData[0].decesEhpad + "</td>"
-                    contenu += "</tr>"
-                    contenu += '<tr>'
-                    contenu += '<th scope="row">Nombre de personnes Hospitalisés</th>'
-                    contenu += "<td>" + information.FranceGlobalLiveData[0].hospitalises + "</td>"
-                    contenu += "</tr>"
-                    contenu += "<tr>";
-                    contenu += '<th scope="row">Nombre de personne en réanimation</th>';
-                    contenu += '<td>' + information.FranceGlobalLiveData[0].reanimation + '</td>';
-                    contenu += '</tr>'
-                    contenu += '<tr>'
-                    contenu += '<th scope="row">Nouvelles hospitalisation</th>'
-                    contenu += '<td>' + information.FranceGlobalLiveData[0].nouvellesHospitalisations + '</td>'
-                    contenu += "</tr>";
-                    contenu += "<tr>"
-                    contenu += '<th scope="row">Nouvelles personnes en réanimation</th>'
-                    contenu += '<td>' + information.FranceGlobalLiveData[0].nouvellesReanimations + '</td>'
-                    contenu += "</tr>";
-                    contenu += "</tbody>";
-                    contenu += "</table>";
-                    contenu += '<div class="row">';
-                    contenu += '<div class="col-6"><h3 class="mb-4 ml-5 text-success">Total des personnes guérie : ' + information.FranceGlobalLiveData[0].gueris + '</h3></div>';
-                    contenu += '<div class="col-6"><h3 class="text-danger">Total des personnes décédé : ' + information.FranceGlobalLiveData[0].deces + '</h3></div>';
-                    contenu += '</div>';
-  
-                    contenuPage.innerHTML = contenu;
-                });
-        </script>
-
+        
     </body>
 </html>
