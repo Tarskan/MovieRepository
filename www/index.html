@@ -45,10 +45,27 @@
             <div class="container">
                 <div class="row">
                     <div class="col s12">
-                        <h2 class="center-align">Bienvenue sur Movie Repository !</h2>
-                        <h4 class="center-align">Vous trouverez ici tout sur les sorites de film et série !</h4>
+                        <h3 class="center-align">Bienvenue sur Movie Repository !</h3>
+                        <h5 class="center-align">Vous trouverez ici tout sur les sorites de film et série !</h5>
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                <h5 class="center-align">Quelle oeuvre cherchez vous ?</h5>
+                <div class="col s2"></div>
+                <div class="col s8">
+                    <div class="input-field">
+                        <input type="text" name="oeuvre" class="form-control" id="inputOeuvre">
+                        <label class="active" for="oeuvre">(Le SDA, Inazuma Eleven...)</label>
+                    </div>
+                    <div class="center-align">
+                        <button type="button" onclick="rechercher()" id="cherche" class="btn">Recherche</button>
+                    </div>
+                </div>
+                <div class="col s2"></div>
+            </div>
+            <div id="notFound" class="row">
+
             </div>
         </main>
 
@@ -79,5 +96,48 @@
             });
         </script>
         
+        <script>
+            function rechercher() {
+                let maRecherche = document.getElementById("inputOeuvre").value;
+    
+                let endPoint = 'https://api.themoviedb.org/3/search/multi?api_key=d887b53b912f07f5bce7f58501df0c2b&language=fr-FR&query=' + maRecherche + '&page=1&include_adult=false';
+    
+                function ajaxGet(url, callback){
+                    var req = new XMLHttpRequest();
+                    req.open('GET', url);
+                    req.addEventListener('load', function() {
+                        if(req.status == 200 || req.status < 400){
+                            callback(req.responseText);
+                        } else {
+                            console.error(req.status + '' + req.statusText + '' + url);
+                        }
+                    });
+                    req.addEventListener('error', function() {
+                        console.error('Erreur avec url : ' + url);
+                    });
+                    req.send(null);
+                }
+    
+                ajaxGet(endPoint, function(reponse) {
+                    let information = JSON.parse(reponse);
+
+                    if(information.results.length > 0) {
+                        if(information.results[0].media_type == "movie") {
+                        document.location.href="..\\view\\movie.html?id=" + information.results[0].id;
+                        } if (information.results[0].media_type == "tv") {
+                            document.location.href="..\\view\\show.html?id=" + information.results[0].id;
+                        } 
+                    } else {
+                        var contenuPage = document.getElementById('notFound');
+                        var contenu = ' <div class="col s3"></div>';
+                        contenu += ' <div class="card-panel red darken-1 col s6"><h6 class="center-align">Aucun résultat !</h6></div>';
+                        contenu += ' <div class="col s3"></div>';
+
+                        contenuPage.innerHTML = contenu;
+                    }
+                });
+            }
+          </script>
+
     </body>
 </html>

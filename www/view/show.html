@@ -75,8 +75,8 @@
         </script>
         <!-- exemple de requete api -->
         <script>
-
-            let endPoint = 'https://api.themoviedb.org/3/tv/100049?api_key=d887b53b912f07f5bce7f58501df0c2b&language=fr-FR';
+            var parsedUrl = new URL(window.location.href);
+            let endPoint = 'https://api.themoviedb.org/3/tv/' + parsedUrl.searchParams.get("id") + '?api_key=d887b53b912f07f5bce7f58501df0c2b&language=fr-FR';
   
             function ajaxGet(url, callback){
                 var req = new XMLHttpRequest();
