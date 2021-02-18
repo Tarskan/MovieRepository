@@ -123,9 +123,9 @@
 
                     if(information.results.length > 0) {
                         if(information.results[0].media_type == "movie") {
-                        document.location.href="..\\view\\movie.html?id=" + information.results[0].id;
+                        document.location.href="./view/movie.html?id=" + information.results[0].id;
                         } if (information.results[0].media_type == "tv") {
-                            document.location.href="..\\view\\show.html?id=" + information.results[0].id;
+                            document.location.href="./view/show.html?id=" + information.results[0].id;
                         } 
                     } else {
                         var contenuPage = document.getElementById('notFound');
