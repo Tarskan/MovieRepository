@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=yes">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, target-densitydpi= device-dpi"/>
+    <meta name="msapplication-tap-highlight" content="no">
+    <link rel="stylesheet" href="../css/index.css">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Movie Repository</title>
+</head>
+<body>
+    <header>
+        <nav class="nav-extended">
+            <div class="nav-wrapper">
+                <img src="../img/logo2.png" alt="Logo" class="logo brand-logo center">
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="left hide-on-med-and-down">
+                    <li><a href="..\index.html">Accueil</a></li>
+                    <li><a href="topMovie.html">Top 10 des films</a></li>
+                    <li><a href="topShow.html">Top 10 des séries</a></li>
+                    <li><a href="discover.html">Découverte de films</a></li>
+                    <li><a href="movieRegister.html">Enregistrer un film</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <ul class="sidenav" id="mobile-demo">
+            <li><a href="..\index.html">Accueil</a></li>
+            <li><a href="topMovie.html">Top 10 des films</a></li>
+            <li><a href="topShow.html">Top 10 des séries</a></li>
+            <li><a href="discover.html">Découverte de films</a></li>
+            <li><a href="movieRegister.html">Enregistrer un film</a></li>
+        </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+
+                    <img id="image" src="" alt="" />
+                    <button id="register_image" type="button">Ajouter une photo</button>
+
+                    <label for="title">Titre du film</label>
+                    <input type="text" id="title" name="title" placeholder="Titre du film" />
+
+                    <label for="description">Description du film</label>
+                    <input type="text" id="description" name="description" placeholder="Description du film" />
+
+                    <label for="kind">Genre</label>
+                    <input type="text" id="kind" name="kind" placeholder="Genre (séparé par des virgules)" />
+
+                    <label for="release_date">Date de sortie</label>
+                    <input type="date" id="release_date" name="release_date" placeholder="Date de sortie" />
+
+                    <button id="submit" type="button">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+
+    <footer class="page-footer">
+        <div class="container-fluid center-align">
+            <div class="row">
+                <div class="col s12">
+                    <a href="">A propos</a>
+                    <a href="">Vie privée</a>
+                    <a href="">Condition d'utilisation</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <i class="far fa-copyright"></i> 2021 MovieRepository, tout droit réservé.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="../js/materialize.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('.sidenav').sidenav();
+        });
+    </script>
+
+    <script>
+        function cameraSuccess(imageURI) {
+            document.getElementById('image').src = imageURI;
+        }
+
+        function cameraError(message) {
+            alert('une erreyr est survenue, veuillez reessayer');
+        }
+
+        var img_button = document.getElementById('register_image');
+        img_button.addEventListener('click', function() {
+           navigator.camera.getPicture(cameraSuccess, cameraError, {quality: 60, destinationType: Camera.DestinationType.FILE_URI});
+        });
+
+
+
+        function movieRegister() {
+
+            let movie = {
+                image_uri: document.getElementById('image').src,
+                title: document.getElementById('title').value,
+                description: document.getElementById('description').value,
+                kind: document.getElementById('kind').value,
+                date: document.getElementById('release_date').value
+            }
+
+            localStorage.setItem("" + localStorage.length, JSON.stringify(movie));
+            location.reload();
+        }
+
+        var submit_button = document.getElementById('submit');
+        submit_button.addEventListener('click', movieRegister);
+
+    </script>
+</body>
+</html>
