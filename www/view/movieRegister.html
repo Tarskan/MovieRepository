@@ -29,6 +29,10 @@
                     <li><a href="movieRegisterList.html">films enregistrés</a></li>
                 </ul>
             </div>
+            <div class="nav-content">
+                <ul class="tabs tabs-transparent">
+                </ul>
+            </div>
         </nav>
 
         <ul class="sidenav" id="mobile-demo">
@@ -46,9 +50,10 @@
         <div class="container">
             <div class="row">
                 <div class="col s12">
-
-                    <img id="image" src="" alt="" />
-                    <button id="register_image" type="button">Ajouter une photo</button> <br />
+                    <div class="center-align">
+                        <img class='materialboxed responsive-img' id="image" src="" alt="" />
+                        <button id="register_image" class="btn" type="button">Ajouter une photo</button> <br />
+                    </div>
 
                     <label for="title">Titre du film</label>
                     <input type="text" id="title" name="title" placeholder="Titre du film" />
@@ -62,7 +67,9 @@
                     <label for="release_date">Date de sortie</label>
                     <input type="date" id="release_date" name="release_date" placeholder="Date de sortie" />
 
-                    <button id="submit" type="button">Enregistrer</button>
+                    <div class="center-align">
+                        <button id="submit" class="btn" type="button">Enregistrer</button>
+                    </div>
                 </div>
             </div>
         </div>
