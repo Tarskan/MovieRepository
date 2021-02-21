@@ -26,6 +26,7 @@
                         <li><a href="topShow.html">Top 10 des séries</a></li>
                         <li><a href="discover.html">Découverte de films</a></li>
                         <li><a href="movieRegister.html">Enregistrer un film</a></li>
+                        <li><a href="movieRegisterList.html">films enregistrés</a></li>
                     </ul>
                 </div>
               </nav>
@@ -36,6 +37,7 @@
                   <li><a href="topShow.html">Top 10 des séries</a></li>
                   <li><a href="discover.html">Découverte de films</a></li>
                   <li><a href="movieRegister.html">Enregistrer un film</a></li>
+                  <li><a href="movieRegisterList.html">films enregistrés</a></li>
               </ul>
             </nav>
         </header>
@@ -78,6 +80,8 @@
         </script>
         <!-- exemple de requete api -->
         <script>
+
+
             var parsedUrl = new URL(window.location.href);
             let endPoint = 'https://api.themoviedb.org/3/movie/' + parsedUrl.searchParams.get("id") + '?api_key=d887b53b912f07f5bce7f58501df0c2b&language=fr-FR';
   

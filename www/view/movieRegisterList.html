@@ -26,6 +26,7 @@
                     <li><a href="topShow.html">Top 10 des séries</a></li>
                     <li><a href="discover.html">Découverte de films</a></li>
                     <li><a href="movieRegister.html">Enregistrer un film</a></li>
+                    <li><a href="movieRegisterList.html">films enregistrés</a></li>
                 </ul>
             </div>
         </nav>
@@ -36,6 +37,7 @@
             <li><a href="topShow.html">Top 10 des séries</a></li>
             <li><a href="discover.html">Découverte de films</a></li>
             <li><a href="movieRegister.html">Enregistrer un film</a></li>
+            <li><a href="movieRegisterList.html">films enregistrés</a></li>
         </ul>
         </nav>
     </header>
@@ -44,14 +46,11 @@
         <div class="container">
             <div class="row">
                 <div class="col s12">
-
-
+                    <div id="resultAPI"></div>
                 </div>
             </div>
         </div>
     </main>
-
-
 
 
     <footer class="page-footer">
@@ -82,6 +81,29 @@
     </script>
 
     <script>
+        var contenuPage = document.getElementById('resultAPI');
+
+        let contenu;
+        contenu = "<ul class='collection with-header'>";
+        contenu += "<li class='collection-header center-align'><h4>Film(s) enregistré(s)</h4></li>";
+
+        let i;
+        for(i = 0; i < localStorage.length; i++) {
+            let obj = localStorage.getItem("" + i);
+            if(obj == null) {
+                continue;
+            }
+            let movie = JSON.parse(obj);
+            contenu += "<li class='collection-item avatar'>";
+            contenu += "<img src='" + movie.image_uri + "' alt='' class='circle'>";
+            contenu += "<span class='title'>" + movie.title + "</span>";
+            contenu += "<p>" + movie.description + "</p>";
+            contenu += "<p>Date de parution : " + movie.date + "</p>";
+            contenu += "<p>Genre : " + movie.kind + "</p>";
+            contenu += "</li>";
+        }
+        contenu += "</ul>";
+        contenuPage.innerHTML = contenu;
 
     </script>
 </body>

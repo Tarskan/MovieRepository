@@ -26,6 +26,7 @@
                         <li><a href="topShow.html">Top 10 des séries</a></li>
                         <li><a href="discover.html">Découverte de films</a></li>
                         <li><a href="movieRegister.html">Enregistrer un film</a></li>
+                        <li><a href="movieRegisterList.html">films enregistrés</a></li>
                     </ul>
                 </div>
               </nav>
@@ -36,6 +37,7 @@
                   <li><a href="topShow.html">Top 10 des séries</a></li>
                   <li><a href="discover.html">Découverte de films</a></li>
                   <li><a href="movieRegister.html">Enregistrer un film</a></li>
+                  <li><a href="movieRegisterList.html">films enregistrés</a></li>
               </ul>
             </nav>
         </header>
@@ -78,7 +80,6 @@
         </script>
         <!-- exemple de requete api -->
         <script>
-
             let endPoint = 'https://api.themoviedb.org/3/discover/movie?api_key=d887b53b912f07f5bce7f58501df0c2b&language=fr-FR&sort_by=popularity.desc&include_adult=true&include_video=false&page=1';
   
             function ajaxGet(url, callback){
